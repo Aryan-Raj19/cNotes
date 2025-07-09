@@ -6,6 +6,7 @@ const noteRoutes = require("./routes/noteRoutes");
 
 const authRoutes = require("./routes/authRoutes");
 const auth = require("./middlewares/authMiddleware");
+const xss = require("xss-clean");
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes); // Authentication routes for signup and login
 app.use("/api/notes", auth, noteRoutes); // Notes are now protected
+app.use(xss()); // sanitize user input from POST body, GET queries, etc.
 
 mongoose
   .connect(process.env.MONGO_URI)
