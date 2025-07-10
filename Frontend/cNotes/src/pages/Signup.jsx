@@ -3,13 +3,13 @@ import API from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export default function Login() {
+export default function Signup() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { setUser } = useAuth();
 
   const onSubmit = async (data) => {
-    const res = await API.post("/auth/login", data);
+    const res = await API.post("/auth/signup", data);
     setUser(res.data);
     navigate("/");
   };
@@ -20,6 +20,7 @@ export default function Login() {
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-sm space-y-4"
       >
+        <input {...register("name")} placeholder="Name" className="input" />
         <input {...register("email")} placeholder="Email" className="input" />
         <input
           {...register("password")}
@@ -28,7 +29,7 @@ export default function Login() {
           className="input"
         />
         <button type="submit" className="btn">
-          Login
+          Sign Up
         </button>
       </form>
     </div>
