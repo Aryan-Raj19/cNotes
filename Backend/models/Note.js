@@ -31,6 +31,10 @@ const noteSchema = new mongoose.Schema(
       type: Boolean, // For archive functionality
       default: false,
     },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
